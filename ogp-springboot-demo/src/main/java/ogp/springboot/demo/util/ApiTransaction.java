@@ -5,13 +5,15 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import ogp.springboot.demo.enumer.Environment;
 
-public class RestConsume {
+@Component
+public class ApiTransaction {
 
 	public String getToken() {
 
@@ -42,5 +44,5 @@ public class RestConsume {
 
 		return result;
 	}
-	
+
 }

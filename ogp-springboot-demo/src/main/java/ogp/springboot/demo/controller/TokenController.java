@@ -3,6 +3,7 @@ package ogp.springboot.demo.controller;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,12 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import ogp.springboot.demo.enumer.Environment;
-import ogp.springboot.demo.util.RestConsume;
+import ogp.springboot.demo.util.ApiTransaction;
+import ogp.springboot.demo.util.Util;
 
 @RestController
 @RequestMapping("/oauth")
 public class TokenController {
 
+	@Autowired
+	private Util util;
+
+	@Autowired
+	private ApiTransaction apiTransaction;
+	
 	@RequestMapping(value = "/token")
 	public HashMap oauthTokens() throws NoSuchAlgorithmException {
 
@@ -55,10 +63,9 @@ public class TokenController {
 	public String getTokens() throws NoSuchAlgorithmException {
 
 		String result = null;
-
-		RestConsume rc = new RestConsume();
-		result = rc.getToken();
+		result = apiTransaction.getToken();
 		System.out.println("controller access_token " + result);
+		System.out.println(util.generateJWTToken());
 
 		return result;
 	}
