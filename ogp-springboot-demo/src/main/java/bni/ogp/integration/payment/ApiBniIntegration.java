@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -52,12 +53,8 @@ public class ApiBniIntegration {
 		RestTemplate restTemplate = new RestTemplate();
 		String url = Environment.DEV.getUrl() + Environment.GET_BALANCE.getUrl() + "?access_token=" + access_token;
 
-		System.out.println("signature " + signature);
-		System.out.println();
-		
 		try {
 			HttpHeaders headers = new HttpHeaders();
-//			headers.setContentType(MediaType.APPLICATION_JSON);
 			headers.add("x-api-key", JwtConstant.API_KEY.getValue());
 			headers.add("Content-Type", "application/json");
 			
@@ -68,22 +65,18 @@ public class ApiBniIntegration {
 
             HttpEntity<String> entity = new HttpEntity<>(request.toString(), headers);
             
-            System.out.println(headers.toString());
-            System.out.println();
-            System.out.println("body " + entity.getBody());
-            System.out.println();
-            System.out.println("url " + url);
-            
             response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-            System.out.println("=======================");
+            HttpStatus status = response.getStatusCode();
+            
+            System.out.println("======================= + status " + status.toString());
             System.out.println(response.getBody().toString());
 //			JSONObject resultToken = new JSONObject(response.getBody().toString());
 //			result = (String) resultToken.get("customerName");
-
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 }
