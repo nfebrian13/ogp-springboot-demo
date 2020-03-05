@@ -58,6 +58,7 @@ public class ApiBniIntegration {
 		String url = Environment.DEV.getUrl() + Environment.GET_BALANCE.getUrl() + "?access_token=" + access_token;
 
 		try {
+			
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("x-api-key", JwtConstant.API_KEY.getValue());
 			headers.add("Content-Type", "application/json");
@@ -72,8 +73,9 @@ public class ApiBniIntegration {
             response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
             HttpStatus status = response.getStatusCode();
             
-            JSONObject json_src = new JSONObject(response.getBody().toString());
-            JSONObject jsonObj = json_src.getJSONObject("getBalanceResponse");
+            JSONObject jsonSrc = new JSONObject(response.getBody().toString());
+            
+            JSONObject jsonObj = jsonSrc.getJSONObject("getBalanceResponse");
             String client_id = jsonObj.get("clientId").toString();
             
             JSONObject param = jsonObj.getJSONObject("parameters");
