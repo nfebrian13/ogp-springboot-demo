@@ -50,9 +50,11 @@ public class ApiBniIntegration {
 	}
 	
 	public String getBalance(String access_token, String signature) {
+		
 		String result = null;
 		ResponseEntity<String> response = null;
 		RestTemplate restTemplate = new RestTemplate();
+		
 		String url = Environment.DEV.getUrl() + Environment.GET_BALANCE.getUrl() + "?access_token=" + access_token;
 
 		try {
