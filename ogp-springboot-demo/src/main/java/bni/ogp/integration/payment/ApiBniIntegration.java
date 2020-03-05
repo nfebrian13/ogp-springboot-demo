@@ -1,13 +1,9 @@
-package bni.ogp.integration.util;
-
-import java.util.HashMap;
-import java.util.Map;
+package bni.ogp.integration.payment;
 
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -18,7 +14,7 @@ import bni.ogp.integration.enumer.Environment;
 import bni.ogp.integration.enumer.JwtConstant;
 
 @Component
-public class ApiTransaction {
+public class ApiBniIntegration {
 
 	public String getToken() {
 

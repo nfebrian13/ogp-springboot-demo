@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import bni.ogp.integration.enumer.Environment;
-import bni.ogp.integration.util.ApiTransaction;
+import bni.ogp.integration.payment.ApiBniIntegration;
 import bni.ogp.integration.util.Util;
 
 @RestController
@@ -26,7 +26,7 @@ public class TokenController {
 	private Util util;
 
 	@Autowired
-	private ApiTransaction apiTransaction;
+	private ApiBniIntegration apiTransaction;
 	
 	@RequestMapping(value = "/token")
 	public HashMap oauthTokens() throws NoSuchAlgorithmException {
