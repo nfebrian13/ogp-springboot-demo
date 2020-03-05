@@ -25,7 +25,6 @@ public class BniTrxController {
 		String result = null;
 		result = apiTransaction.getBalance(apiTransaction.getToken(), util.generateJWTToken());
 
-		System.out.println("customerName is " + result);
 		return result;
 	}
 

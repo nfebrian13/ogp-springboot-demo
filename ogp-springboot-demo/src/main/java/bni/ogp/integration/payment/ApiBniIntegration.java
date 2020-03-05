@@ -11,6 +11,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.google.gson.JsonObject;
+
 import bni.ogp.integration.enumer.Environment;
 import bni.ogp.integration.enumer.JwtConstant;
 
@@ -68,10 +70,26 @@ public class ApiBniIntegration {
             response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
             HttpStatus status = response.getStatusCode();
             
-            System.out.println("======================= + status " + status.toString());
-            System.out.println(response.getBody().toString());
-//			JSONObject resultToken = new JSONObject(response.getBody().toString());
-//			result = (String) resultToken.get("customerName");
+            JSONObject json_src = new JSONObject(response.getBody().toString());
+            JSONObject jsonObj = json_src.getJSONObject("getBalanceResponse");
+            String client_id = jsonObj.get("clientId").toString();
+            
+            JSONObject param = jsonObj.getJSONObject("parameters");
+			String responseCode = param.get("responseCode").toString();
+			String responseMessage = param.get("responseMessage").toString();
+			String responseTimestamp = param.get("responseTimestamp").toString();
+			String customerName = param.get("customerName").toString();
+			String accountCurrency = param.get("responseTimestamp").toString();
+			String accountBalance = param.get("customerName").toString();
+			
+            System.out.println("clientId " + client_id);
+            System.out.println("responseCode " + responseCode);
+            System.out.println("responseMessage " + responseMessage);
+            System.out.println("responseTimestamp " + responseTimestamp);
+            System.out.println("customerName " + customerName);
+            System.out.println("accountCurrency " + accountCurrency);
+            System.out.println("accountBalance " + accountBalance);
+            
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
