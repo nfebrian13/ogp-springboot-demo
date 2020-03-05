@@ -1,4 +1,4 @@
-package ogp.springboot.demo.model;
+package bni.ogp.integration.model;
 
 public class HouseInquiry {
 

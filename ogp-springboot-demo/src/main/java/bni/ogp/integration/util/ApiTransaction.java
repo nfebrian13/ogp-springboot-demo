@@ -1,4 +1,4 @@
-package ogp.springboot.demo.util;
+package bni.ogp.integration.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +14,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import ogp.springboot.demo.enumer.Environment;
-import ogp.springboot.demo.enumer.JwtConstant;
+import bni.ogp.integration.enumer.Environment;
+import bni.ogp.integration.enumer.JwtConstant;
 
 @Component
 public class ApiTransaction {

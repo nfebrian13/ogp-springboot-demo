@@ -1,4 +1,4 @@
-package ogp.springboot.demo.controller;
+package bni.ogp.integration.controller;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import ogp.springboot.demo.enumer.Environment;
-import ogp.springboot.demo.util.ApiTransaction;
-import ogp.springboot.demo.util.Util;
+import bni.ogp.integration.enumer.Environment;
+import bni.ogp.integration.util.ApiTransaction;
+import bni.ogp.integration.util.Util;
 
 @RestController
 @RequestMapping("/oauth")

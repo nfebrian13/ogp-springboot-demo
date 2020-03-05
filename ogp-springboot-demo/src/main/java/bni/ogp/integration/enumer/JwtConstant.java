@@ -1,4 +1,4 @@
-package ogp.springboot.demo.enumer;
+package bni.ogp.integration.enumer;
 
 public enum JwtConstant {
 	

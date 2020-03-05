@@ -1,4 +1,4 @@
-package ogp.springboot.demo.response;
+package bni.ogp.integration.response;
 
 public class Response {
 	

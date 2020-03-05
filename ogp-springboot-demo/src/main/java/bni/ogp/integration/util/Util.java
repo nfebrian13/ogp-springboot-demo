@@ -1,4 +1,4 @@
-package ogp.springboot.demo.util;
+package bni.ogp.integration.util;
 
 import java.util.Base64;
 
@@ -7,7 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.stereotype.Component;
 
-import ogp.springboot.demo.enumer.JwtConstant;
+import bni.ogp.integration.enumer.JwtConstant;
 
 @Component
 public class Util {

@@ -1,6 +1,6 @@
-package ogp.springboot.demo.model;
+package bni.ogp.integration.model;
 
-public class HoldAmountRelease {
+public class HoldAmount {
 
 	private String accountOwner;
 	private String customerReference;
