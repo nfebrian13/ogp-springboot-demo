@@ -12,7 +12,7 @@
 	<groupId>com.ogp.springboot</groupId>
 	<artifactId>ogp-springboot-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ogp-springboot-demo</name>
+	<name>bni-ogp-integration</name>
 	<description>Springboot app demo</description>
 
 	<properties>
