@@ -105,10 +105,24 @@ public class ObjectConverter {
 	}
 	
 	public Payment paymentConverter(JSONObject jsonObj) throws JSONException {
+		payment.setResponseCode(jsonObj.isNull("responseCode") ? null : jsonObj.get("responseCode").toString());
+		payment.setResponseMessage(jsonObj.isNull("responseMessage") ? null : jsonObj.get("responseMessage").toString());
+		payment.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
+		payment.setDebitAccountNo(jsonObj.isNull("debitAccountNo") ? null : jsonObj.get("debitAccountNo").toString());
+		payment.setCreditAccountNo(jsonObj.isNull("creditAccountNo") ? null : jsonObj.get("creditAccountNo").toString());
+		payment.setValueAmount(jsonObj.isNull("valueAmount") ? null : jsonObj.get("valueAmount").toString());
+		payment.setValueCurrency(jsonObj.isNull("valueCurrency") ? null : jsonObj.get("valueCurrency").toString());
+		payment.setBankReference(jsonObj.isNull("bankReference") ? null : jsonObj.get("bankReference").toString());
+		payment.setCustomerReference(jsonObj.isNull("customerReference") ? null : jsonObj.get("customerReference").toString());
 		return payment;
 	}
 	
 	public PaymentStatus PaymentStatusConverter(JSONObject jsonObj) throws JSONException {
+		paymentStatus.setResponseCode(jsonObj.isNull("responseCode") ? null : jsonObj.get("responseCode").toString());
+		paymentStatus.setResponseMessage(jsonObj.isNull("responseMessage") ? null : jsonObj.get("responseMessage").toString());
+		paymentStatus.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
+		paymentStatus.setBankReference(jsonObj.isNull("bankReference") ? null : jsonObj.get("bankReference").toString());
+		paymentStatus.setCustomerReference(jsonObj.isNull("customerReference") ? null : jsonObj.get("customerReference").toString());
 		return paymentStatus;
 	}
 

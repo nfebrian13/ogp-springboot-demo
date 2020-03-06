@@ -1,8 +1,5 @@
 package bni.ogp.integration.model;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,10 +10,10 @@ public class Payment {
 	private String responseTimestamp;
 	private String debitAccountNo;
 	private String creditAccountNo;
-	private BigDecimal valueAmount;
+	private String valueAmount;
 	private String valueCurrency;
-	private BigInteger bankReference;
-	private BigInteger customerReference;
+	private String bankReference;
+	private String customerReference;
 	
 	public String getResponseCode() {
 		return responseCode;
@@ -48,10 +45,10 @@ public class Payment {
 	public void setCreditAccountNo(String creditAccountNo) {
 		this.creditAccountNo = creditAccountNo;
 	}
-	public BigDecimal getValueAmount() {
+	public String getValueAmount() {
 		return valueAmount;
 	}
-	public void setValueAmount(BigDecimal valueAmount) {
+	public void setValueAmount(String valueAmount) {
 		this.valueAmount = valueAmount;
 	}
 	public String getValueCurrency() {
@@ -60,16 +57,16 @@ public class Payment {
 	public void setValueCurrency(String valueCurrency) {
 		this.valueCurrency = valueCurrency;
 	}
-	public BigInteger getBankReference() {
+	public String getBankReference() {
 		return bankReference;
 	}
-	public void setBankReference(BigInteger bankReference) {
+	public void setBankReference(String bankReference) {
 		this.bankReference = bankReference;
 	}
-	public BigInteger getCustomerReference() {
+	public String getCustomerReference() {
 		return customerReference;
 	}
-	public void setCustomerReference(BigInteger customerReference) {
+	public void setCustomerReference(String customerReference) {
 		this.customerReference = customerReference;
 	}
 	
