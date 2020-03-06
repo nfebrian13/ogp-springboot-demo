@@ -94,6 +94,13 @@ public class ObjectConverter {
 	}
 
 	public InterBankInquiry interBankInquiryConverter(JSONObject jsonObj) throws JSONException {
+		interBankInquiry.setResponseCode(jsonObj.isNull("responseCode") ? null : jsonObj.get("responseCode").toString());
+		interBankInquiry.setResponseMessage(jsonObj.isNull("responseMessage") ? null : jsonObj.get("responseMessage").toString());
+		interBankInquiry.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
+		interBankInquiry.setDestinationAccountNum(jsonObj.isNull("destinationAccountNum") ? null : jsonObj.get("destinationAccountNum").toString());
+		interBankInquiry.setDestinationAccountName(jsonObj.isNull("destinationAccountName") ? null : jsonObj.get("destinationAccountName").toString());
+		interBankInquiry.setDestinationBankName(jsonObj.isNull("destinationBankName") ? null : jsonObj.get("destinationBankName").toString());
+		interBankInquiry.setRetrievalReffNum(jsonObj.isNull("retrievalReffNum") ? null : jsonObj.get("retrievalReffNum").toString());
 		return interBankInquiry;
 	}
 	
