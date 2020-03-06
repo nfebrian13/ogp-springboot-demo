@@ -29,22 +29,6 @@ public class ApiBniIntegration {
 	private ObjectConverter objConv;
 
 	@Autowired
-	private Balance balance;
-
-	@Autowired
-	private HouseInquiry houseInquiry;
-	
-	@Autowired
-	private PaymentStatus paymentStatus;
-	
-	@Autowired
-	private InterBankInquiry interBankInquiry;
-
-	@Autowired
-	private InterBankPayment interBankPayment;
-
-	
-	@Autowired
 	private Util util;
 
 	public String getToken() {
@@ -77,13 +61,13 @@ public class ApiBniIntegration {
 		return result;
 	}
 
-	public String getBalance(String access_token) {
+	public Balance getBalance(String access_token) {
 
-		String result = null;
+		final String url = Environment.DEV.getUrl() + Environment.GET_BALANCE.getUrl() + "?access_token=" + access_token;
+		
+		Balance objBalance = new Balance();
 		ResponseEntity<String> response = null;
 		RestTemplate restTemplate = new RestTemplate();
-
-		String url = Environment.DEV.getUrl() + Environment.GET_BALANCE.getUrl() + "?access_token=" + access_token;
 
 		try {
 
@@ -106,27 +90,26 @@ public class ApiBniIntegration {
 				JSONObject jsonSrc = new JSONObject(response.getBody().toString());
 				JSONObject jsonObj = jsonSrc.getJSONObject("getBalanceResponse");
 				JSONObject param = jsonObj.getJSONObject("parameters");
-				String client_id = jsonObj.get("clientId").toString();
+//				String client_id = jsonObj.get("clientId").toString();
 
-				balance = objConv.balanceConverter(param);
+				objBalance = objConv.balanceConverter(param);
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
-		return result;
+
+		return objBalance;
 	}
 
-	public String getInHouseInquiry(String access_token) {
+	public HouseInquiry getInHouseInquiry(String access_token) {
 
-		String result = null;
+		final  String url = Environment.DEV.getUrl() + Environment.GET_HOUSE_INQUIRY.getUrl() + "?access_token=" + access_token;
+		
 		ResponseEntity<String> response = null;
 		RestTemplate restTemplate = new RestTemplate();
-
-		String url = Environment.DEV.getUrl() + Environment.GET_HOUSE_INQUIRY.getUrl() + "?access_token="
-				+ access_token;
+		HouseInquiry objHouseInquiry = new HouseInquiry();
 
 		try {
 
@@ -149,9 +132,9 @@ public class ApiBniIntegration {
 				JSONObject jsonSrc = new JSONObject(response.getBody().toString());
 				JSONObject jsonObj = jsonSrc.getJSONObject("getInHouseInquiryResponse");
 				JSONObject param = jsonObj.getJSONObject("parameters");
-				String client_id = jsonObj.get("clientId").toString();
+//				String client_id = jsonObj.get("clientId").toString();
 
-				houseInquiry = objConv.houseInquiryConverter(param);
+				objHouseInquiry = objConv.houseInquiryConverter(param);
 			}
 
 		} catch (Exception e) {
@@ -159,16 +142,16 @@ public class ApiBniIntegration {
 			e.printStackTrace();
 		}
 
-		return result;
+		return objHouseInquiry;
 	}
-	
-	public String getPaymentStatus(String access_token) {
 
-		String result = null;
+	public PaymentStatus getPaymentStatus(String access_token) {
+
+		final String url = Environment.DEV.getUrl() + Environment.GET_PAYMENT_STATUS.getUrl() + "?access_token=" + access_token;
+		
 		ResponseEntity<String> response = null;
 		RestTemplate restTemplate = new RestTemplate();
-
-		String url = Environment.DEV.getUrl() + Environment.GET_PAYMENT_STATUS.getUrl() + "?access_token=" + access_token;
+		PaymentStatus objPayment = new PaymentStatus();
 
 		try {
 
@@ -178,7 +161,7 @@ public class ApiBniIntegration {
 
 			JSONObject request = new JSONObject();
 			request.put("clientId", "IDBNIU0FOREJPWA==");
-			request.put("customerReferenceNumber", "20170227000000000020"); 
+			request.put("customerReferenceNumber", "20170227000000000020");
 			request.put("signature", util.generateJWTToken(request.toString()));
 
 			HttpEntity<String> entity = new HttpEntity<>(request.toString(), headers);
@@ -189,12 +172,11 @@ public class ApiBniIntegration {
 			if (statusCode != null && statusCode.is2xxSuccessful()) {
 
 				JSONObject jsonSrc = new JSONObject(response.getBody().toString());
-				JSONObject jsonObj = jsonSrc.getJSONObject("getPaymentStatusResponse"); 
+				JSONObject jsonObj = jsonSrc.getJSONObject("getPaymentStatusResponse");
 				JSONObject param = jsonObj.getJSONObject("parameters");
-				String client_id = jsonObj.get("clientId").toString();
+//				String client_id = jsonObj.get("clientId").toString();
 
-				paymentStatus = objConv.PaymentStatusConverter(param);
-				
+				objPayment = objConv.PaymentStatusConverter(param);
 			}
 
 		} catch (Exception e) {
@@ -202,29 +184,30 @@ public class ApiBniIntegration {
 			e.printStackTrace();
 		}
 		
-		return result;
+		return objPayment;
+		
 	}
-	
-	public String getInterBankInquiry(String access_token) {
 
-		String result = null;
+	public InterBankInquiry getInterBankInquiry(String access_token) {
+
+		final String url = Environment.DEV.getUrl() + Environment.GET_INTERBANK_INQUIRY.getUrl() + "?access_token=" + access_token;
+		
 		ResponseEntity<String> response = null;
 		RestTemplate restTemplate = new RestTemplate();
-
-		String url = Environment.DEV.getUrl() + Environment.GET_INTERBANK_INQUIRY.getUrl() + "?access_token=" + access_token;
+		InterBankInquiry objInterBank = new InterBankInquiry();
 
 		try {
-			
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("x-api-key", JwtConstant.API_KEY.getValue());
 			headers.add("Content-Type", "application/json");
 
 			JSONObject request = new JSONObject();
 			request.put("clientId", "IDBNIU0FOREJPWA==");
-			request.put("accountNum", "113183203"); 
-			request.put("destinationBankCode", "014"); 
-			request.put("destinationAccountNum", "3333333333"); 
-			request.put("customerReferenceNumber", "20170227000000000021"); 
+			request.put("accountNum", "113183203");
+			request.put("destinationBankCode", "014");
+			request.put("destinationAccountNum", "3333333333");
+			request.put("customerReferenceNumber", "20170227000000000021");
 			request.put("signature", util.generateJWTToken(request.toString()));
 
 			HttpEntity<String> entity = new HttpEntity<>(request.toString(), headers);
@@ -235,42 +218,42 @@ public class ApiBniIntegration {
 			if (statusCode != null && statusCode.is2xxSuccessful()) {
 
 				JSONObject jsonSrc = new JSONObject(response.getBody().toString());
-				JSONObject jsonObj = jsonSrc.getJSONObject("getInterbankInquiryResponse");  
+				JSONObject jsonObj = jsonSrc.getJSONObject("getInterbankInquiryResponse");
 				JSONObject param = jsonObj.getJSONObject("parameters");
-				String client_id = jsonObj.get("clientId").toString();
+//				String client_id = jsonObj.get("clientId").toString();
 
-				interBankInquiry = objConv.interBankInquiryConverter(param);
+				objInterBank = objConv.interBankInquiryConverter(param);
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
-		return result;
+
+		return objInterBank;
 	}
 
-	public String getInterBankPayment(String access_token) {
+	public InterBankPayment getInterBankPayment(String access_token) {
 
-		String result = null;
+		final String url = Environment.DEV.getUrl() + Environment.GET_INTERBANK_PAYMENT.getUrl() + "?access_token=" + access_token;
+		
 		ResponseEntity<String> response = null;
 		RestTemplate restTemplate = new RestTemplate();
-
-		String url = Environment.DEV.getUrl() + Environment.GET_INTERBANK_PAYMENT.getUrl() + "?access_token=" + access_token;
+		InterBankPayment objInterBankPayment = new InterBankPayment();
 
 		try {
-				
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("x-api-key", JwtConstant.API_KEY.getValue());
 			headers.add("Content-Type", "application/json");
 
 			JSONObject request = new JSONObject();
 			request.put("clientId", "IDBNIU0FOREJPWA==");
-			request.put("customerReferenceNumber", "20170227000000000021"); 
-			request.put("amount", "10000"); 
-			request.put("destinationAccountNum", "3333333333"); 
-			request.put("destinationAccountName", "BENEFICIARY NAME 1 UNTIL HERE1BENEFICIARY NAME 2(OPT) UNTIL HERE2"); 
-			request.put("destinationBankCode", "014"); 
+			request.put("customerReferenceNumber", "20170227000000000021");
+			request.put("amount", "10000");
+			request.put("destinationAccountNum", "3333333333");
+			request.put("destinationAccountName", "BENEFICIARY NAME 1 UNTIL HERE1BENEFICIARY NAME 2(OPT) UNTIL HERE2");
+			request.put("destinationBankCode", "014");
 			request.put("destinationBankName", "BCA");
 			request.put("accountNum", "115471119");
 			request.put("retrievalReffNum", "100000000024");
@@ -284,20 +267,20 @@ public class ApiBniIntegration {
 			if (statusCode != null && statusCode.is2xxSuccessful()) {
 
 				JSONObject jsonSrc = new JSONObject(response.getBody().toString());
-				JSONObject jsonObj = jsonSrc.getJSONObject("getInterbankPaymentResponse"); 
+				JSONObject jsonObj = jsonSrc.getJSONObject("getInterbankPaymentResponse");
 				JSONObject param = jsonObj.getJSONObject("parameters");
-				String client_id = jsonObj.get("clientId").toString();
+//				String client_id = jsonObj.get("clientId").toString();
 
-				interBankPayment = objConv.interBankPaymentConverter(param);
-				
+				objInterBankPayment = objConv.interBankPaymentConverter(param);
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+
+		return objInterBankPayment;
 		
-		return result;
 	}
-	
+
 }

@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import bni.ogp.integration.model.Balance;
+import bni.ogp.integration.model.HouseInquiry;
+import bni.ogp.integration.model.InterBankInquiry;
+import bni.ogp.integration.model.InterBankPayment;
+import bni.ogp.integration.model.PaymentStatus;
 import bni.ogp.integration.payment.ApiBniIntegration;
 import bni.ogp.integration.util.Util;
 
@@ -21,51 +26,37 @@ public class BniTrxController {
 
 	@RequestMapping(value = "/get/balance")
 	public String getBalance() throws NoSuchAlgorithmException {
-
-		String result = null;
-		result = apiTransaction.getBalance(apiTransaction.getToken());
-
-		return result;
+		Balance bal = new Balance();
+		bal = apiTransaction.getBalance(apiTransaction.getToken());
+		return bal.getCustomerName();
 	}
-	
+
 	@RequestMapping(value = "/get/inHouseInquiry")
 	public String getInHouseInquiry() throws NoSuchAlgorithmException {
-
-		String result = null;
-		result = apiTransaction.getInHouseInquiry(apiTransaction.getToken());
-
-		return result;
+		HouseInquiry objHouseInquiry = new HouseInquiry();
+		objHouseInquiry = apiTransaction.getInHouseInquiry(apiTransaction.getToken());
+		return objHouseInquiry.getCustomerName();
 	}
-	
+
 	@RequestMapping(value = "/get/paymentStatus")
 	public String getPaymentStatus() throws NoSuchAlgorithmException {
-
-		String result = null;
-		result = apiTransaction.getPaymentStatus(apiTransaction.getToken());
-
-		return result;
+		PaymentStatus objPaymentStatus = new PaymentStatus();
+		objPaymentStatus = apiTransaction.getPaymentStatus(apiTransaction.getToken());
+		return objPaymentStatus.getCustomerReference();
 	}
-	
+
 	@RequestMapping(value = "/get/interBankInquiry")
 	public String getInterBankInquiry() throws NoSuchAlgorithmException {
-
-		String result = null;
-		result = apiTransaction.getInterBankInquiry(apiTransaction.getToken());
-
-		return result;
+		InterBankInquiry objInterBankInquiry = new InterBankInquiry();
+		objInterBankInquiry = apiTransaction.getInterBankInquiry(apiTransaction.getToken());
+		return objInterBankInquiry.getDestinationBankName();
 	}
-	
+
 	@RequestMapping(value = "/get/interBankPayment")
 	public String getInterBankPayment() throws NoSuchAlgorithmException {
-
-		String result = null;
-		result = apiTransaction.getInterBankPayment(apiTransaction.getToken());
-
-		return result;
+		InterBankPayment objInterBankPayment = new InterBankPayment();
+		objInterBankPayment = apiTransaction.getInterBankPayment(apiTransaction.getToken());
+		return objInterBankPayment.getAccountName();
 	}
-	
-	
-	
-	
 
 }
