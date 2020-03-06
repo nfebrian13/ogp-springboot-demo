@@ -123,6 +123,17 @@ public class ObjectConverter {
 		paymentStatus.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
 		paymentStatus.setBankReference(jsonObj.isNull("bankReference") ? null : jsonObj.get("bankReference").toString());
 		paymentStatus.setCustomerReference(jsonObj.isNull("customerReference") ? null : jsonObj.get("customerReference").toString());
+		
+		JSONObject param = jsonObj.getJSONObject("previousResponse");
+		
+		paymentStatus.setTransactionStatus(jsonObj.isNull("transactionStatus") ? null : jsonObj.get("transactionStatus").toString());
+		paymentStatus.setPreviousResponseCode(jsonObj.isNull("previousResponseCode") ? null : jsonObj.get("previousResponseCode").toString());
+		paymentStatus.setPreviousResponseMessage(jsonObj.isNull("previousResponseMessage") ? null : jsonObj.get("previousResponseMessage").toString());
+		paymentStatus.setPreviousResponseTimestamp(jsonObj.isNull("previousResponseTimestamp") ? null : jsonObj.get("previousResponseTimestamp").toString());
+		paymentStatus.setDebitAccountNo(jsonObj.isNull("debitAccountNo") ? null : jsonObj.get("debitAccountNo").toString());
+		paymentStatus.setCreditAccountNo(jsonObj.isNull("creditAccountNo") ? null : jsonObj.get("creditAccountNo").toString());
+		paymentStatus.setValueAmount(jsonObj.isNull("valueAmount") ? null : jsonObj.get("valueAmount").toString());
+		paymentStatus.setValueCurrency(jsonObj.isNull("valueCurrency") ? null : jsonObj.get("valueCurrency").toString());
 		return paymentStatus;
 	}
 

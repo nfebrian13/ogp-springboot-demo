@@ -29,10 +29,19 @@ public class BniTrxController {
 	}
 	
 	@RequestMapping(value = "/get/inHouseInquiry")
-	public String getinHouseInquiry() throws NoSuchAlgorithmException {
+	public String getInHouseInquiry() throws NoSuchAlgorithmException {
 
 		String result = null;
 		result = apiTransaction.getInHouseInquiry(apiTransaction.getToken());
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/get/paymentStatus")
+	public String getPaymentStatus() throws NoSuchAlgorithmException {
+
+		String result = null;
+		result = apiTransaction.getPaymentStatus(apiTransaction.getToken());
 
 		return result;
 	}

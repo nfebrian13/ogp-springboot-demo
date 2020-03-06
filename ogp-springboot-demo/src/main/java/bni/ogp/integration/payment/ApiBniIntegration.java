@@ -17,6 +17,7 @@ import bni.ogp.integration.enumer.Environment;
 import bni.ogp.integration.enumer.JwtConstant;
 import bni.ogp.integration.model.Balance;
 import bni.ogp.integration.model.HouseInquiry;
+import bni.ogp.integration.model.PaymentStatus;
 import bni.ogp.integration.util.Util;
 
 @Component
@@ -30,6 +31,9 @@ public class ApiBniIntegration {
 
 	@Autowired
 	private HouseInquiry houseInquiry;
+	
+	@Autowired
+	private PaymentStatus paymentStatus;
 
 	@Autowired
 	private Util util;
@@ -112,7 +116,8 @@ public class ApiBniIntegration {
 		ResponseEntity<String> response = null;
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = Environment.DEV.getUrl() + Environment.GET_HOUSE_INQUIRY.getUrl() + "?access_token=" + access_token;
+		String url = Environment.DEV.getUrl() + Environment.GET_HOUSE_INQUIRY.getUrl() + "?access_token="
+				+ access_token;
 
 		try {
 
@@ -138,6 +143,49 @@ public class ApiBniIntegration {
 				String client_id = jsonObj.get("clientId").toString();
 
 				houseInquiry = objConv.houseInquiryConverter(param);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	public String getPaymentStatus(String access_token) {
+
+		String result = null;
+		ResponseEntity<String> response = null;
+		RestTemplate restTemplate = new RestTemplate();
+
+		String url = Environment.DEV.getUrl() + Environment.GET_PAYMENT_STATUS.getUrl() + "?access_token=" + access_token;
+
+		try {
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("x-api-key", JwtConstant.API_KEY.getValue());
+			headers.add("Content-Type", "application/json");
+
+			JSONObject request = new JSONObject();
+			request.put("clientId", "IDBNIU0FOREJPWA==");
+			request.put("customerReferenceNumber", "20170227000000000020"); 
+			request.put("signature", util.generateJWTToken(request.toString()));
+
+			HttpEntity<String> entity = new HttpEntity<>(request.toString(), headers);
+
+			response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+			HttpStatus statusCode = response.getStatusCode();
+
+			if (statusCode != null && statusCode.is2xxSuccessful()) {
+
+				JSONObject jsonSrc = new JSONObject(response.getBody().toString());
+				JSONObject jsonObj = jsonSrc.getJSONObject("getPaymentStatusResponse"); 
+				JSONObject param = jsonObj.getJSONObject("parameters");
+				String client_id = jsonObj.get("clientId").toString();
+
+				paymentStatus = objConv.PaymentStatusConverter(param);
+				
 			}
 
 		} catch (Exception e) {
