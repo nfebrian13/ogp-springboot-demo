@@ -7,6 +7,9 @@ public enum Environment {
 	GET_PAYMENT_STATUS("getpaymentstatus"),
 	GET_INTERBANK_INQUIRY("getinterbankinquiry"),
 	GET_INTERBANK_PAYMENT("getinterbankpayment"),
+	DO_PAYMENT("dopayment"),
+	HOLD_AMOUNT("holdamount"),
+	HOLD_AMOUNT_RELEASE("holdamountrelease"),
 	
 	DEV("https://apidev.bni.co.id:8067/H2H/v2/"),
 	BNI("https://apidev.bni.co.id:8067/api/oauth/token"), 
