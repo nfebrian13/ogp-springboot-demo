@@ -6,6 +6,7 @@ public enum Environment {
 	GET_HOUSE_INQUIRY("getinhouseinquiry"),
 	GET_PAYMENT_STATUS("getpaymentstatus"),
 	GET_INTERBANK_INQUIRY("getinterbankinquiry"),
+	GET_INTERBANK_PAYMENT("getinterbankpayment"),
 	
 	DEV("https://apidev.bni.co.id:8067/H2H/v2/"),
 	BNI("https://apidev.bni.co.id:8067/api/oauth/token"), 

@@ -46,7 +46,7 @@ public class BniTrxController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/get/InterBankInquiry")
+	@RequestMapping(value = "/get/interBankInquiry")
 	public String getInterBankInquiry() throws NoSuchAlgorithmException {
 
 		String result = null;
@@ -54,6 +54,17 @@ public class BniTrxController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/get/interBankPayment")
+	public String getInterBankPayment() throws NoSuchAlgorithmException {
+
+		String result = null;
+		result = apiTransaction.getInterBankPayment(apiTransaction.getToken());
+
+		return result;
+	}
+	
+	
 	
 	
 
