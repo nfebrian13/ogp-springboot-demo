@@ -42,6 +42,12 @@ public class ObjectConverter {
 	private PaymentStatus paymentStatus;
 
 	public Balance balanceConverter(JSONObject jsonObj) throws JSONException {
+		balance.setResponseCode(jsonObj.isNull("responseCode") ? null : jsonObj.get("responseCode").toString());
+		balance.setResponseMessage(jsonObj.isNull("responseMessage") ? null : jsonObj.get("responseMessage").toString());
+		balance.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
+		balance.setCustomerName(jsonObj.isNull("customerName") ? null : jsonObj.get("customerName").toString());
+		balance.setAccountCurrency(jsonObj.isNull("accountCurrency") ? null : jsonObj.get("accountCurrency").toString());
+		balance.setAccountBalance(jsonObj.isNull("accountBalance") ? null : jsonObj.get("accountBalance").toString());
 		return balance;
 	}
 

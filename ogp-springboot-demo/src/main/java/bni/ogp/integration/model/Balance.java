@@ -1,13 +1,35 @@
 package bni.ogp.integration.model;
 
-import java.math.BigDecimal;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Balance {
 	
+	private String responseCode;
+	private String responseMessage;
+	private String responseTimestamp;
 	private String customerName;
 	private String accountCurrency;
-	private BigDecimal accountBalance;
+	private String accountBalance;
 	
+	public String getResponseCode() {
+		return responseCode;
+	}
+	public void setResponseCode(String responseCode) {
+		this.responseCode = responseCode;
+	}
+	public String getResponseMessage() {
+		return responseMessage;
+	}
+	public void setResponseMessage(String responseMessage) {
+		this.responseMessage = responseMessage;
+	}
+	public String getResponseTimestamp() {
+		return responseTimestamp;
+	}
+	public void setResponseTimestamp(String responseTimestamp) {
+		this.responseTimestamp = responseTimestamp;
+	}
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -20,12 +42,10 @@ public class Balance {
 	public void setAccountCurrency(String accountCurrency) {
 		this.accountCurrency = accountCurrency;
 	}
-	public BigDecimal getAccountBalance() {
+	public String getAccountBalance() {
 		return accountBalance;
 	}
-	public void setAccountBalance(BigDecimal accountBalance) {
+	public void setAccountBalance(String accountBalance) {
 		this.accountBalance = accountBalance;
 	}
-	
-	
 }

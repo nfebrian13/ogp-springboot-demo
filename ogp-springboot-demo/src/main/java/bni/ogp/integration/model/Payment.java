@@ -3,6 +3,9 @@ package bni.ogp.integration.model;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Payment {
 
 	private String customerReferenceNumber;

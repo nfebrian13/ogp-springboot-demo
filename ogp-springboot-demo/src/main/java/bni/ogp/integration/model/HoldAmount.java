@@ -1,5 +1,8 @@
 package bni.ogp.integration.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class HoldAmount {
 
 	private String accountOwner;

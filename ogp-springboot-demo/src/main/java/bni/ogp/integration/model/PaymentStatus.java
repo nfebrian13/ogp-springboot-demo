@@ -2,6 +2,9 @@ package bni.ogp.integration.model;
 
 import java.math.BigDecimal;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PaymentStatus {
 
 	private String previousResponse;

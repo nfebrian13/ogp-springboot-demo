@@ -7,7 +7,6 @@ public enum JwtConstant {
 	SECRET("ab80ff61-bb0e-4f36-8cb1-e5d80796ace9"),
 	API_KEY("94eb95e2-f38b-4fe2-bbc5-6cad256fccc3");
 	
-
 	private String value;
 
 	JwtConstant(String value) {

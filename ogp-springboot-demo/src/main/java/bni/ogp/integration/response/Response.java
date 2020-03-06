@@ -1,5 +1,8 @@
 package bni.ogp.integration.response;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Response {
 	
 	private String responseCode;
