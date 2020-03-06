@@ -16,6 +16,7 @@ import bni.ogp.integration.converter.ObjectConverter;
 import bni.ogp.integration.enumer.Environment;
 import bni.ogp.integration.enumer.JwtConstant;
 import bni.ogp.integration.model.Balance;
+import bni.ogp.integration.model.HouseInquiry;
 
 @Component
 public class ApiBniIntegration {
@@ -25,6 +26,9 @@ public class ApiBniIntegration {
 
 	@Autowired
 	private Balance balance;
+	
+	@Autowired
+	private HouseInquiry houseInquiry;
 
 	public String getToken() {
 
@@ -56,6 +60,10 @@ public class ApiBniIntegration {
 		return result;
 	}
 
+	/* 
+	 * Get Balance
+	 *  
+	 *  */
 	public String getBalance(String access_token, String signature) {
 
 		String result = null;
@@ -96,5 +104,55 @@ public class ApiBniIntegration {
 		}
 		return result;
 	}
+	
+	/* 
+	 * Get In House Inquiry
+	 *  
+	 *  */
+	public String getInHouseInquiry(String access_token, String signature) {
+
+		String result = null;
+		ResponseEntity<String> response = null;
+		RestTemplate restTemplate = new RestTemplate();
+
+		String url = Environment.DEV.getUrl() + Environment.GET_HOUSE_INQUIRY.getUrl() + "?access_token=" + access_token;
+
+		try {
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("x-api-key", JwtConstant.API_KEY.getValue());
+			headers.add("Content-Type", "application/json");
+
+			JSONObject request = new JSONObject();
+			request.put("clientId", "IDBNIU0FOREJPWA==");
+//			request.put("accountNo", "0115476117");
+			request.put("accountNo", "8696000000000146");
+			request.put("signature", signature);
+
+			HttpEntity<String> entity = new HttpEntity<>(request.toString(), headers);
+
+			response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+			HttpStatus statusCode = response.getStatusCode();
+
+			if (statusCode != null && statusCode.is2xxSuccessful()) {
+
+				JSONObject jsonSrc = new JSONObject(response.getBody().toString());
+				JSONObject jsonObj = jsonSrc.getJSONObject("getInHouseInquiryResponse");
+				JSONObject param = jsonObj.getJSONObject("parameters");
+				String client_id = jsonObj.get("clientId").toString();
+				
+				houseInquiry = objConv.houseInquiryConverter(param);
+				
+			} 
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
 	
 }

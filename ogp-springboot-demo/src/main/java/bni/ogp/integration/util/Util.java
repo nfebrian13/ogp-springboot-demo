@@ -18,8 +18,9 @@ public class Util {
 
 		// JWT token expires 60 seconds from now
 		// long timeSecs = (System.currentTimeMillis() / 1000) + 60;
-
-		String payload = JwtConstant.PAYLOAD.getValue();
+		
+//		String payload = JwtConstant.PAYLOAD.getValue();
+		String payload = JwtConstant.PAYLOAD_HOUSE.getValue();
 		String base64UrlPayload = Base64.getUrlEncoder().withoutPadding().encodeToString(payload.getBytes());
 
 		try {

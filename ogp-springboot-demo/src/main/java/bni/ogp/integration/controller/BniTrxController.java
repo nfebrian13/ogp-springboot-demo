@@ -27,5 +27,14 @@ public class BniTrxController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/get/inHouseInquiry")
+	public String getinHouseInquiry() throws NoSuchAlgorithmException {
+
+		String result = null;
+		result = apiTransaction.getInHouseInquiry(apiTransaction.getToken(), util.generateJWTToken());
+
+		return result;
+	}
 
 }
