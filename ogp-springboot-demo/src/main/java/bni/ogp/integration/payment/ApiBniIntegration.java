@@ -88,8 +88,7 @@ public class ApiBniIntegration {
 				String client_id = jsonObj.get("clientId").toString();
 
 				balance = objConv.balanceConverter(param);
-
-			}
+			} 
 
 		} catch (Exception e) {
 			// TODO: handle exception

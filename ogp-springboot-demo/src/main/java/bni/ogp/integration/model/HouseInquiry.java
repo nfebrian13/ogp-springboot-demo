@@ -4,13 +4,34 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HouseInquiry {
-
+	
+	private String responseCode;
+	private String responseMessage;
+	private String responseTimestamp;
 	private String customerName;
 	private String accountCurrency;
 	private String accountNumber;
 	private String accountStatus;
 	private String accountType;
 	
+	public String getResponseCode() {
+		return responseCode;
+	}
+	public void setResponseCode(String responseCode) {
+		this.responseCode = responseCode;
+	}
+	public String getResponseMessage() {
+		return responseMessage;
+	}
+	public void setResponseMessage(String responseMessage) {
+		this.responseMessage = responseMessage;
+	}
+	public String getResponseTimestamp() {
+		return responseTimestamp;
+	}
+	public void setResponseTimestamp(String responseTimestamp) {
+		this.responseTimestamp = responseTimestamp;
+	}
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -41,4 +62,5 @@ public class HouseInquiry {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
+	
 }

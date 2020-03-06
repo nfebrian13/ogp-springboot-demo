@@ -52,18 +52,44 @@ public class ObjectConverter {
 	}
 
 	public HoldAmount holdAmountConverter(JSONObject jsonObj) throws JSONException {
+		holdAmount.setResponseCode(jsonObj.isNull("responseCode") ? null : jsonObj.get("responseCode").toString());
+		holdAmount.setResponseMessage(jsonObj.isNull("responseMessage") ? null : jsonObj.get("responseMessage").toString());
+		holdAmount.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
+		holdAmount.setAccountOwner(jsonObj.isNull("accountOwner") ? null : jsonObj.get("accountOwner").toString());
+		holdAmount.setBankReference(jsonObj.isNull("bankReference") ? null : jsonObj.get("bankReference").toString());
+		holdAmount.setCustomerReference(jsonObj.isNull("customerReference") ? null : jsonObj.get("customerReference").toString());
 		return holdAmount;
 	}
 
 	public HoldAmountRelease holdAmountReleaseConverter(JSONObject jsonObj) throws JSONException {
+		holdAmountRelease.setResponseCode(jsonObj.isNull("responseCode") ? null : jsonObj.get("responseCode").toString());
+		holdAmountRelease.setResponseMessage(jsonObj.isNull("responseMessage") ? null : jsonObj.get("responseMessage").toString());
+		holdAmountRelease.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
+		holdAmountRelease.setAccountOwner(jsonObj.isNull("accountOwner") ? null : jsonObj.get("accountOwner").toString());
+		holdAmountRelease.setBankReference(jsonObj.isNull("bankReference") ? null : jsonObj.get("bankReference").toString());
+		holdAmountRelease.setCustomerReference(jsonObj.isNull("customerReference") ? null : jsonObj.get("customerReference").toString());
 		return holdAmountRelease;
 	}
 
 	public HouseInquiry houseInquiryConverter(JSONObject jsonObj) throws JSONException {
+		houseInquiry.setResponseCode(jsonObj.isNull("responseCode") ? null : jsonObj.get("responseCode").toString());
+		houseInquiry.setResponseMessage(jsonObj.isNull("responseMessage") ? null : jsonObj.get("responseMessage").toString());
+		houseInquiry.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
+		houseInquiry.setAccountCurrency(jsonObj.isNull("accountCurrency") ? null : jsonObj.get("accountCurrency").toString());
+		houseInquiry.setAccountNumber(jsonObj.isNull("accountNumber") ? null : jsonObj.get("accountNumber").toString());
+		houseInquiry.setAccountStatus(jsonObj.isNull("accountStatus") ? null : jsonObj.get("accountStatus").toString());
+		houseInquiry.setAccountType(jsonObj.isNull("accountType") ? null : jsonObj.get("accountType").toString());
 		return houseInquiry;
 	}
 
 	public InterBankPayment interBankPaymentConverter(JSONObject jsonObj) throws JSONException {
+		interBankPayment.setResponseCode(jsonObj.isNull("responseCode") ? null : jsonObj.get("responseCode").toString());
+		interBankPayment.setResponseMessage(jsonObj.isNull("responseMessage") ? null : jsonObj.get("responseMessage").toString());
+		interBankPayment.setResponseTimestamp(jsonObj.isNull("responseTimestamp") ? null : jsonObj.get("responseTimestamp").toString());
+		interBankPayment.setDestinationAccountNum(jsonObj.isNull("destinationAccountNum") ? null : jsonObj.get("destinationAccountNum").toString());
+		interBankPayment.setDestinationAccountName(jsonObj.isNull("destinationAccountName") ? null : jsonObj.get("destinationAccountName").toString());
+		interBankPayment.setAccountName(jsonObj.isNull("accountName") ? null : jsonObj.get("accountName").toString());
+		interBankPayment.setCustomerReffNum(jsonObj.isNull("customerReffNum") ? null : jsonObj.get("customerReffNum").toString());
 		return interBankPayment;
 	}
 
