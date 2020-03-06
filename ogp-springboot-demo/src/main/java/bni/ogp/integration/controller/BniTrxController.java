@@ -23,7 +23,7 @@ public class BniTrxController {
 	public String getBalance() throws NoSuchAlgorithmException {
 
 		String result = null;
-		result = apiTransaction.getBalance(apiTransaction.getToken(), util.generateJWTToken());
+		result = apiTransaction.getBalance(apiTransaction.getToken());
 
 		return result;
 	}
@@ -32,7 +32,7 @@ public class BniTrxController {
 	public String getinHouseInquiry() throws NoSuchAlgorithmException {
 
 		String result = null;
-		result = apiTransaction.getInHouseInquiry(apiTransaction.getToken(), util.generateJWTToken());
+		result = apiTransaction.getInHouseInquiry(apiTransaction.getToken());
 
 		return result;
 	}

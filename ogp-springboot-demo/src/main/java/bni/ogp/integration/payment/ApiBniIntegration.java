@@ -17,6 +17,7 @@ import bni.ogp.integration.enumer.Environment;
 import bni.ogp.integration.enumer.JwtConstant;
 import bni.ogp.integration.model.Balance;
 import bni.ogp.integration.model.HouseInquiry;
+import bni.ogp.integration.util.Util;
 
 @Component
 public class ApiBniIntegration {
@@ -26,9 +27,12 @@ public class ApiBniIntegration {
 
 	@Autowired
 	private Balance balance;
-	
+
 	@Autowired
 	private HouseInquiry houseInquiry;
+
+	@Autowired
+	private Util util;
 
 	public String getToken() {
 
@@ -60,11 +64,7 @@ public class ApiBniIntegration {
 		return result;
 	}
 
-	/* 
-	 * Get Balance
-	 *  
-	 *  */
-	public String getBalance(String access_token, String signature) {
+	public String getBalance(String access_token) {
 
 		String result = null;
 		ResponseEntity<String> response = null;
@@ -81,7 +81,7 @@ public class ApiBniIntegration {
 			JSONObject request = new JSONObject();
 			request.put("clientId", "IDBNIU0FOREJPWA==");
 			request.put("accountNo", "0115476117");
-			request.put("signature", signature);
+			request.put("signature", util.generateJWTToken(request.toString()));
 
 			HttpEntity<String> entity = new HttpEntity<>(request.toString(), headers);
 
@@ -96,20 +96,17 @@ public class ApiBniIntegration {
 				String client_id = jsonObj.get("clientId").toString();
 
 				balance = objConv.balanceConverter(param);
-			} 
+			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
-	
-	/* 
-	 * Get In House Inquiry
-	 *  
-	 *  */
-	public String getInHouseInquiry(String access_token, String signature) {
+
+	public String getInHouseInquiry(String access_token) {
 
 		String result = null;
 		ResponseEntity<String> response = null;
@@ -125,9 +122,8 @@ public class ApiBniIntegration {
 
 			JSONObject request = new JSONObject();
 			request.put("clientId", "IDBNIU0FOREJPWA==");
-//			request.put("accountNo", "0115476117");
-			request.put("accountNo", "8696000000000146");
-			request.put("signature", signature);
+			request.put("accountNo", "8696000000000146"); // 0115476117
+			request.put("signature", util.generateJWTToken(request.toString()));
 
 			HttpEntity<String> entity = new HttpEntity<>(request.toString(), headers);
 
@@ -140,10 +136,9 @@ public class ApiBniIntegration {
 				JSONObject jsonObj = jsonSrc.getJSONObject("getInHouseInquiryResponse");
 				JSONObject param = jsonObj.getJSONObject("parameters");
 				String client_id = jsonObj.get("clientId").toString();
-				
+
 				houseInquiry = objConv.houseInquiryConverter(param);
-				
-			} 
+			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -151,8 +146,6 @@ public class ApiBniIntegration {
 		}
 		
 		return result;
-		
 	}
-	
-	
+
 }

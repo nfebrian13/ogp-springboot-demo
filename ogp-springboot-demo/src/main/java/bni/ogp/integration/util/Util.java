@@ -12,7 +12,7 @@ import bni.ogp.integration.enumer.JwtConstant;
 @Component
 public class Util {
 
-	public String generateJWTToken() throws RuntimeException {
+	public String generateJWTToken(String payload) throws RuntimeException {
 		String header = JwtConstant.HEADER.getValue();
 		String base64UrlHeader = Base64.getUrlEncoder().withoutPadding().encodeToString(header.getBytes());
 
@@ -20,12 +20,11 @@ public class Util {
 		// long timeSecs = (System.currentTimeMillis() / 1000) + 60;
 		
 //		String payload = JwtConstant.PAYLOAD.getValue();
-		String payload = JwtConstant.PAYLOAD_HOUSE.getValue();
+//		String payload = JwtConstant.PAYLOAD_HOUSE.getValue();
 		String base64UrlPayload = Base64.getUrlEncoder().withoutPadding().encodeToString(payload.getBytes());
 
 		try {
-			String base64UrlSignature = hmacEncode(base64UrlHeader + "." + base64UrlPayload,
-					JwtConstant.SECRET.getValue());
+			String base64UrlSignature = hmacEncode(base64UrlHeader + "." + base64UrlPayload, JwtConstant.SECRET.getValue());
 			return base64UrlHeader + "." + base64UrlPayload + "." + base64UrlSignature;
 
 		} catch (Exception e) {

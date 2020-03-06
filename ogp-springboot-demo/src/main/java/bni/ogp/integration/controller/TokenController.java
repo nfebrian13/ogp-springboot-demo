@@ -65,7 +65,7 @@ public class TokenController {
 		String result = null;
 		result = apiTransaction.getToken();
 		System.out.println("controller access_token " + result);
-		System.out.println(util.generateJWTToken());
+//		System.out.println(util.generateJWTToken());
 
 		return result;
 	}
@@ -74,7 +74,7 @@ public class TokenController {
 	public String getBalance() throws NoSuchAlgorithmException {
 
 		String result = null;
-		result = apiTransaction.getBalance(apiTransaction.getToken(), util.generateJWTToken());
+//		result = apiTransaction.getBalance(apiTransaction.getToken(), util.generateJWTToken());
 
 		System.out.println("customerName is " + result);
 		return result;
