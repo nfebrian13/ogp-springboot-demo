@@ -10,6 +10,7 @@ import bni.ogp.integration.model.Balance;
 import bni.ogp.integration.model.HouseInquiry;
 import bni.ogp.integration.model.InterBankInquiry;
 import bni.ogp.integration.model.InterBankPayment;
+import bni.ogp.integration.model.Payment;
 import bni.ogp.integration.model.PaymentStatus;
 import bni.ogp.integration.payment.ApiBniIntegration;
 import bni.ogp.integration.util.Util;
@@ -57,6 +58,13 @@ public class BniTrxController {
 		InterBankPayment objInterBankPayment = new InterBankPayment();
 		objInterBankPayment = apiTransaction.getInterBankPayment(apiTransaction.getToken());
 		return objInterBankPayment.getAccountName();
+	}
+
+	@RequestMapping(value = "/do/payment")
+	public String doPayment() throws NoSuchAlgorithmException {
+		Payment objPayment = new Payment();
+		objPayment = apiTransaction.doPayment(apiTransaction.getToken());
+		return objPayment.getBankReference();
 	}
 
 }

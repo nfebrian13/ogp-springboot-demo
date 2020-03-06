@@ -19,6 +19,7 @@ import bni.ogp.integration.model.Balance;
 import bni.ogp.integration.model.HouseInquiry;
 import bni.ogp.integration.model.InterBankInquiry;
 import bni.ogp.integration.model.InterBankPayment;
+import bni.ogp.integration.model.Payment;
 import bni.ogp.integration.model.PaymentStatus;
 import bni.ogp.integration.util.Util;
 
@@ -278,9 +279,63 @@ public class ApiBniIntegration {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-
 		return objInterBankPayment;
-		
 	}
+	
+	public Payment doPayment(String access_token) {
+
+		final String url = Environment.DEV.getUrl() + Environment.DO_PAYMENT.getUrl() + "?access_token=" + access_token;
+		
+		ResponseEntity<String> response = null;
+		RestTemplate restTemplate = new RestTemplate();
+		Payment objPayment = new Payment();
+
+		try {
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("x-api-key", JwtConstant.API_KEY.getValue());
+			headers.add("Content-Type", "application/json");
+
+			JSONObject request = new JSONObject();
+			request.put("clientId", "IDBNIU0FOREJPWA==");
+			request.put("customerReferenceNumber", "20170227000000000020");
+			request.put("paymentMethod", "0");
+			request.put("debitAccountNo", "113183203");
+			request.put("creditAccountNo", "115471119");
+			request.put("valueDate", "20170227000000000");
+			request.put("valueCurrency", "IDR");
+			request.put("valueAmount", "100500");
+			request.put("remark", "?");
+			request.put("beneficiaryEmailAddress", "");
+			request.put("beneficiaryName", "Mr.X");
+			request.put("beneficiaryAddress1", "Jakarta");
+			request.put("beneficiaryAddress2", "");
+			request.put("destinationBankCode", "CENAIDJAXXX");
+			request.put("chargingModelId", "OUR");
+			request.put("signature", util.generateJWTToken(request.toString()));
+
+			HttpEntity<String> entity = new HttpEntity<>(request.toString(), headers);
+
+			response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+			HttpStatus statusCode = response.getStatusCode();
+
+			if (statusCode != null && statusCode.is2xxSuccessful()) {
+
+				JSONObject jsonSrc = new JSONObject(response.getBody().toString());
+				JSONObject jsonObj = jsonSrc.getJSONObject("doPaymentResponse"); 
+				JSONObject param = jsonObj.getJSONObject("parameters");
+//				String client_id = jsonObj.get("clientId").toString();
+
+				objPayment = objConv.paymentConverter(param);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return objPayment;
+	}
+	
 
 }
